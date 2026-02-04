@@ -70,8 +70,15 @@ OpenBlueprint/ (루트 폴더)
 └── account/           # 로그인, 회원가입, 프로필 관리
 ```
 
-### Runs Server 
+### Run Server 
 
+- frontend
+
+```bash
+npx next dev -H 0.0.0.0
+```
+
+-backend 
 
 ```bash
 python3 manage.py runserver [port_numer]

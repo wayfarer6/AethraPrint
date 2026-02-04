@@ -41,3 +41,6 @@ OpenBlueprint_venv/
 ### OS ###
 .DS_Store
 Thumbs.db
+
+## excloud node_module
+node_modules/
