@@ -78,6 +78,17 @@ class Node(models.Model):
 
 
 
+
+class SSLCert(models.Model):
+    name = ""
+
+
+class SSHPublicKey(models.Model):
+
+class SSHPrivateKey(models.Model):
+
+
+
 # NVD(National Vulnerability Database)에 있는 보안 정보
 
 class CveMain(models.Model):

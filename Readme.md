@@ -57,6 +57,8 @@
 
 - 로그 기능 지원
 
+- Git 기반 버전 관리 지원
+
 ## Key Features (EN)
 - Gold Image Generation for VPS with Ansible, Packer
 
@@ -78,9 +80,11 @@
 
 - Support Logging
 
+- Git Based Version Management
+
 ## Prerequisites / 사전 요구 사항
 
-- This project use Ansible, Pakcer, Opentufu, Python 3.10 (Django project)
+- This project use Ansible, Pakcer, OpenTofu, Python 3.10 (Django project)
 
 ### Create Conda 
 ```bash
@@ -142,3 +146,61 @@ npx next dev -H 0.0.0.0
 python3 manage.py runserver [port_numer]
 ```
 
+#### 사용자 생성 프로젝트 폴더 구조 
+
+```bash
+```bash
+
+.blueprint.cf # 메타 데이터 및 프로젝트 관련 설정
+.blueprint_db.sqlite3
+
+# openTofu and vps infra
+.vps_data.json
+.opentofu_data.json
+
+# kubernetes
+.namespace.json
+.pod.json
+
+
+
+#network setup 
+.subnet.json
+.vps_network_config.json
+.firewall.json
+.namespace_network.json
+
+# vps image
+.vps_package.json
+.kern_param.json
+
+# pod and vps package check
+.security_test_result.json
+
+# 
+.result/
+  |---- opentufu/
+				|--- opentufu file  
+| -----  Ansible
+		 | vps01
+					--- playbook file
+		 | vps02 
+				 ----   playbook file
+
+./credential
+	|---- sealsecret_cert/
+					public.pem , private.pem
+  |---- ssh cert
+  |---- private.sqlite3 # 각종 인프라 pw 및 credential 정보
+  |----
+	
+./wiki
+	l----- playbook.md
+	|----- network_design_diagram.md
+  |----- vps_image_design.md
+  
+  |----- secruity_repot_vps.md
+  |----- security_report_network.md
+  |----- security_report_pod.md
+  |----- 
+```
