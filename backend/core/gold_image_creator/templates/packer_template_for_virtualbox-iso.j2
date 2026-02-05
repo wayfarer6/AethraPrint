@@ -1,0 +1,49 @@
+
+packer {
+  required_plugins {
+    virtualbox = {
+      version = ">= 0.0.1"
+      source  = "github.com/hashicorp/virtualbox"
+    }
+  }
+}
+
+
+source "virtualbox-iso" "{{ vps_name }}" {
+    vm_name       = "{{ vm_name }}"
+    guest_os_type = "{{ os_type }}"
+    iso_url       = "{{ iso_url }}"
+    iso_checksum  = "{{ iso_checksum }}"
+    
+
+    cpus          = {{ cpu_count }}
+    memory        = {{ memory_size }}
+    disk_size     = {{ disk_size }}
+
+    headless      = false
+    iso_interface = "{{ iso_interface }}"
+
+    boot_command = [
+        # 리스트 형태이므로 비워두어도 에러는 안 나지만, 
+        # 실제 빌드를 위해선 OS별 명령어가 들어가야 함
+    ]
+
+    ssh_username = "blueprint_user"
+    ssh_password = "{{ password }}"
+}
+
+boot_command = [
+  {% for cmd in cmd_list %}
+    "{{cmd}}"{{ "," if not loop.last }}
+  {% endfor %}
+]
+
+
+build {
+    sources = {{ boot_commands | tojson }}
+
+    provisioner "ansible" {
+        playbook_file = "{{ playbook_location }}"
+        user          = "blueprint_user"
+    }
+}
