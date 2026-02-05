@@ -35,6 +35,7 @@
 
 - 네트워크 토폴로지 디자이너
     - 복잡한 네트워크 구조를 시각적으로 설계하고 관리하는 도구 제공.
+    - open vswitch, dhcp, dns server ... 기타 등등 지원
 
 - Code to Pod (코드에서 포드로)
     - 소스 코드를 쿠버네티스(Kubernetes) 포드 단위로 즉시 배포하는 워크플로우 지원.
@@ -60,6 +61,7 @@
 - Gold Image Generation for VPS with Ansible, Packer
 
 - Network Topology Designer 
+    - open vswitch, dhcp, dns server ... etc support
 
 - Code to Pod
 

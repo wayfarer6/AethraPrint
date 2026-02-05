@@ -56,12 +56,11 @@ class PreInstalledDriver(models.Model):
 
 
 
-
-
-
-
 class SubNet(models.Model):
     subnet_name = models.CharField(max_length=50)
+
+class Vswitch(models.Model):
+    switch_name = models.CharField(max_length=50)
 
 class VPSNetworkInterface(models.Model):
     iface_name = models.CharField(max_length=50) #interface 이름
