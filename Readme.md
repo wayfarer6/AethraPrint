@@ -17,6 +17,8 @@
 
 - 프로젝트 icon은 Google Nano Banana Pro를 통해 생성했습니다.
 
+- SSO 지원을 위해 OIDC와 SAML을 지원합니다
+
 ## Development Motivation (EN)
 
 - Visualizing Infrastructure: Inspired by the Blueprint system in Unreal Engine, this project provides a node-based visual development environment for Kubernetes and Helm charts.
@@ -27,6 +29,7 @@
 
 - Unified Control: We streamline the orchestration of complex tools like Helm, Ansible, and Packer into a single, intuitive interface.
 
+- OIDC and SAML Support for Single Sign On (SSO)
 
 ## Key Features (KO)
 
