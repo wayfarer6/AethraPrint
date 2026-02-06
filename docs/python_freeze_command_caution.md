@@ -1,0 +1,1 @@
+sed -i 's/==.*+ubuntu.*//g' requirements.txt # to remove ubuntu only packages
