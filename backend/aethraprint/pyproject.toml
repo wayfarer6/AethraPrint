@@ -1,0 +1,9 @@
+[tool.pyright]
+# BasedPyright는 Pyright의 설정을 하위 호환하므로 이 섹션을 더 잘 인식합니다.
+typeCheckingMode = "standard"
+
+# 'analysis' 섹션을 따로 분리하지 않고 아래에 바로 적어보세요.
+reportUnknownMemberType = "none"
+reportUnannotatedClassAttribute = "none"
+reportMissingTypeArgument = "none"
+reportGeneralTypeIssues = "none"

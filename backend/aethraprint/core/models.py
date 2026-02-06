@@ -1,16 +1,20 @@
+from django.db.models.fields import AutoField
+
+
+from django.db.models.fields.related import ForeignKey
+from django.conf import settings
+
+from typing import Any
+
+
 import os
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser # 이 임포트가 중요합니다!
 # Project Model
 
-class AethraPrint(models.Model):
-    project_name = CharField(max_length=100, unique=True)
-
-    owner = model.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        related_name='aethraprint_projects'
-    )
+class AethraPrintProject(models.Model):
+    project_name = models.CharField(max_length=100, unique=True)
+    owner_id = models.IntegerField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -67,25 +71,42 @@ class VPSNetworkInterface(models.Model):
     
 
 
+class VPS(models.Model):
+    pass
 
 class Node(models.Model):
     node_name = models.CharField(max_length=50)
     node_ip = models.CharField(max_length=30)
     node_auth = models.CharField(max_length=10) # ssh, 등등 연결 방식
 
-    def edit_ip(new_ip):
-        node_ip = new_ip
+    project = models.ForeignKey(
+        AethraPrintProject,
+        on_delete=models.CASCADE,
+        related_name='nodes' # 프로젝트들이 각 node를 가짐.
+    )
 
 
+class VPSMetric(models.Model):
+    pass
 
 
-class SSLCert(models.Model):
+class SSLCert(models.Model): 
     name = ""
-
+    file_type = " " #root ca or wildcard cert, or web site cert
+    password = models.TextField() #  인증서를 갖고 오기 위한 비번
+    #cert_type =
+    #file_name =  # 암호화된 cert 파일 이름
 
 class SSHPublicKey(models.Model):
+    key_id = models.AutoField(primary_key=True)
+    enc_algo = models.CharField(max_length=20) # -t ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa
+    cert = models.TextField()
+    owner_id = models.IntegerField()
+    project_id = models.IntegerField() 
+
 
 class SSHPrivateKey(models.Model):
+    key_id =  models.ForeignKey(SSHPublicKey, on_delete=models.CASCADE)
 
 
 
@@ -114,11 +135,17 @@ class AffectedProducts(models.Model):
     cve = models.ForeignKey(CveMain, on_delete=models.CASCADE, related_name='affected_products')
     # CPE 2.3 형식을 저장 (예: cpe:2.3:a:microsoft:word:2016:*:*:*:*:*:*:*)
     cpe_match = models.CharField(max_length=255)
-    vulnerable = models.BooleanField(default=True)
+    vulnerable = models.BooleanField()
     version_start_including = models.CharField(max_length=50, null=True, blank=True)
     version_end_excluding = models.CharField(max_length=50, null=True, blank=True)
 
 class CveReferences(models.Model):
     cve = models.ForeignKey(CveMain, on_delete=models.CASCADE, related_name='references')
-    url = models.URLField(max_length=500)
-    source = models.CharField(max_length=100, null=True, blank=True)
+    url  = models.TextField()
+    source  = models.CharField(max_length=100, null=True, blank=True)
+
+
+class User(AbstractUser):
+    display_name = models.CharField(max_length=50, blank=True, null=True)
+
+
