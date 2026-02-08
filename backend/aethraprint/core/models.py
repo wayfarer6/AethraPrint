@@ -66,10 +66,19 @@ class SubNet(models.Model):
 class Vswitch(models.Model):
     switch_name = models.CharField(max_length=50)
 
+class VyOSContainer(models.Model):
+    vy_name = models.CharField(max_lenght=50)
+
 class VPSNetworkInterface(models.Model):
     iface_name = models.CharField(max_length=50) #interface 이름
     
 
+class Gns3Server(models.Model):
+    gns3_ip = models.CharFiled(max_length=50)
+    gns3_port = models.IntegerField()
+
+class Gns3Project(models.Model):
+    project_name = models.CharField(max_length=50)
 
 class VPS(models.Model):
     pass
@@ -147,5 +156,6 @@ class CveReferences(models.Model):
 
 class User(AbstractUser):
     display_name = models.CharField(max_length=50, blank=True, null=True)
+
 
 
